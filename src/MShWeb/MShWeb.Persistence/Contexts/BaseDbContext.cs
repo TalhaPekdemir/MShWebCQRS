@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MShWeb.Domain.Entities;
+using System.Reflection;
 
 namespace MShWeb.Persistence.Contexts
 {
@@ -12,6 +13,11 @@ namespace MShWeb.Persistence.Contexts
         public BaseDbContext(DbContextOptions<BaseDbContext> options) : base(options)
         {
 
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }
 }
