@@ -16,6 +16,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MShWeb.Persistence", "src\MShWeb\MShWeb.Persistence\MShWeb.Persistence.csproj", "{41BEB6AC-92F6-4B23-B9EC-A93BFDC29FC5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MShWeb.WebAPI", "src\MShWeb\MShWeb.API\MShWeb.WebAPI.csproj", "{FB9B02E7-7A37-4F90-A95A-ED2D2C89BFA5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{41BEB6AC-92F6-4B23-B9EC-A93BFDC29FC5} = {41BEB6AC-92F6-4B23-B9EC-A93BFDC29FC5}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

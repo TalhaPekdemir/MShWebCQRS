@@ -9,7 +9,7 @@ namespace MShWeb.Persistence.Contexts
         public DbSet<Product> Products { get; set; }
         public DbSet<Image> Images { get; set; }
 
-        public BaseDbContext(DbContextOptions options) : base(options)
+        public BaseDbContext(DbContextOptions<BaseDbContext> options) : base(options)
         {
 
         }
