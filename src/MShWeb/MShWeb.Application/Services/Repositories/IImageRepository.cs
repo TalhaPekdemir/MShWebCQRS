@@ -2,7 +2,7 @@
 
 namespace MShWeb.Application.Services.Repositories
 {
-    public interface IImageRepository : IAsyncRepository<Image>
+    public interface IImageRepository : IAsyncRepository<Image, Guid>
     {
     }
 }

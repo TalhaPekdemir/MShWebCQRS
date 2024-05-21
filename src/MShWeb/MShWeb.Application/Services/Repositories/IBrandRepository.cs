@@ -2,7 +2,7 @@
 
 namespace MShWeb.Application.Services.Repositories
 {
-    public interface IProductRepository : IAsyncRepository<Product>
+    public interface IProductRepository : IAsyncRepository<Product, Guid>
     {
     }
 }
