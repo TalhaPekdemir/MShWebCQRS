@@ -1,4 +1,4 @@
-﻿namespace MShWeb.Application.Features.Product.Commands.Delete
+﻿namespace MShWeb.Application.Features.Products.Commands.Delete
 {
     public class DeleteProductCommand
     {

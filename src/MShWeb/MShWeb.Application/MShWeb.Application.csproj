@@ -11,9 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Product\Rules\" />
-    <Folder Include="Features\Product\Profiles\" />
-    <Folder Include="Features\Product\Queries\" />
+    <Folder Include="Features\Products\Queries\" />
   </ItemGroup>
 
   <ItemGroup>

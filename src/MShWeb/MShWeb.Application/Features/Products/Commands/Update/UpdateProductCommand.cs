@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace MShWeb.Application.Features.Product.Commands.Update
+namespace MShWeb.Application.Features.Products.Commands.Update
 {
     public class UpdateProductCommand
     {

@@ -1,4 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using MShWeb.Application.Features.Products.Rules;
+using MShWeb.Application.Services.Images;
+using MShWeb.Application.Services.Products;
 using System.Reflection;
 
 namespace MShWeb.Application
@@ -14,8 +17,11 @@ namespace MShWeb.Application
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             // TODO add business rules
+            services.AddScoped<ProductBusinessRules>();
 
             // TODO add repository implementation services
+            services.AddScoped<IProductService, ProductManager>();
+            services.AddScoped<IImageService, ImageManager>();
 
             return services;
         }
