@@ -1,4 +1,5 @@
 using MShWeb.Persistence;
+using MShWeb.Application;
 
 namespace MShWeb.API
 {
@@ -16,6 +17,7 @@ namespace MShWeb.API
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddPersistenceServices(builder.Configuration);
+            builder.Services.AddApplicationServices();
 
             var app = builder.Build();
 

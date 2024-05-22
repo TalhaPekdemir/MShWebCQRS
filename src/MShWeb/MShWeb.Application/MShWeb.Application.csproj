@@ -10,4 +10,16 @@
     <ProjectReference Include="..\MShWeb.Domain\MShWeb.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Product\Rules\" />
+    <Folder Include="Features\Product\Profiles\" />
+    <Folder Include="Features\Product\Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="MediatR" Version="12.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
+  </ItemGroup>
+
 </Project>

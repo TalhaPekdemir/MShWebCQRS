@@ -22,7 +22,7 @@ namespace MShWeb.Persistence.Repositories
             return entity;
         }
 
-        public async Task DeleteAsync(TEntity entity, bool isSoft)
+        public async Task<TEntity> DeleteAsync(TEntity entity, bool isSoft)
         {
             // ignoring the fact that entities has relationships
             if (isSoft)
@@ -36,6 +36,7 @@ namespace MShWeb.Persistence.Repositories
             }
 
             await _context.SaveChangesAsync();
+            return entity;
         }
 
         public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate)

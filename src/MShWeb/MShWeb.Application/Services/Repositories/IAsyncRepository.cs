@@ -14,6 +14,6 @@ namespace MShWeb.Application.Services.Repositories
 
         Task<TEntity> UpdateAsync(TEntity entity);
         
-        Task DeleteAsync(TEntity entity, bool isSoft);
+        Task<TEntity> DeleteAsync(TEntity entity, bool isSoft);
     }
 }
