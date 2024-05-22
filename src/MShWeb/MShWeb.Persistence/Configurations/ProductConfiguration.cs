@@ -20,6 +20,8 @@ namespace MShWeb.Persistence.Configurations
             builder.HasMany(p => p.Images);
 
             builder.HasQueryFilter(p => !p.DeletedDate.HasValue);
+
+            
         }
     }
 }

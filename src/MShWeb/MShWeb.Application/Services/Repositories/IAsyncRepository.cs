@@ -1,4 +1,5 @@
-﻿using MShWeb.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore.Query;
+using MShWeb.Domain.Entities;
 using System.Linq.Expressions;
 
 namespace MShWeb.Application.Services.Repositories
@@ -8,7 +9,7 @@ namespace MShWeb.Application.Services.Repositories
         Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate);
 
         // TODO add pagination
-        Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? predicate = null);
+        Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? predicate = null, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null);
 
         Task<TEntity> CreateAsync(TEntity entity);
 

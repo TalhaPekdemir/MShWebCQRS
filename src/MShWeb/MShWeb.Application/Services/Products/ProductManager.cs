@@ -1,4 +1,5 @@
-﻿using MShWeb.Application.Services.Repositories;
+﻿using Microsoft.EntityFrameworkCore.Query;
+using MShWeb.Application.Services.Repositories;
 using MShWeb.Domain.Entities;
 using System.Linq.Expressions;
 
@@ -25,9 +26,12 @@ namespace MShWeb.Application.Services.Products
             return deletedProduct;
         }
 
-        public async Task<List<Product>> GetAllAsync(Expression<Func<Product, bool>>? predicate = null)
+        public async Task<List<Product>> GetAllAsync(
+            Expression<Func<Product, bool>>? predicate = null,
+            Func<IQueryable<Product>, IIncludableQueryable<Product, object>>? include = null
+            )
         {
-            return await _productRepository.GetAllAsync(predicate);
+            return await _productRepository.GetAllAsync(predicate, include);
         }
 
         public async Task<Product> GetAsync(Expression<Func<Product, bool>> predicate)

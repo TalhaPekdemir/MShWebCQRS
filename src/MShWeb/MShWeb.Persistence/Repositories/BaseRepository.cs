@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using MShWeb.Application.Services.Repositories;
 using MShWeb.Domain.Entities;
 using System.Linq.Expressions;
@@ -39,17 +40,24 @@ namespace MShWeb.Persistence.Repositories
             return entity;
         }
 
-        public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate)
+        public async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate)
         {
             IQueryable<TEntity> query = _context.Set<TEntity>();
 
             return await EntityFrameworkQueryableExtensions.FirstOrDefaultAsync(query, predicate);
         }
 
-        public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? predicate = null)
+        public async Task<List<TEntity>> GetAllAsync(
+            Expression<Func<TEntity, bool>>? predicate = null, 
+            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null)
         {
             // like _context.[DbSet].ToList() 
             IQueryable<TEntity> query = _context.Set<TEntity>();
+
+            if (include != null) 
+            {
+                query = include(query);
+            }
 
             if (predicate != null)
             {
