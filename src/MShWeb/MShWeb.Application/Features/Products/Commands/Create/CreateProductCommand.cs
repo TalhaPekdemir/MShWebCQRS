@@ -15,7 +15,7 @@ namespace MShWeb.Application.Features.Products.Commands.Create
 
         public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, CreatedProductResponse>
         {
-            private readonly Mapper _mapper;
+            private readonly IMapper _mapper;
             private readonly IProductRepository _productRepository;
             private readonly ProductBusinessRules _productBusinessRules;
 
@@ -28,8 +28,15 @@ namespace MShWeb.Application.Features.Products.Commands.Create
 
             public async Task<CreatedProductResponse> Handle(CreateProductCommand request, CancellationToken cancellationToken)
             {
+                // check business rules
                 await _productBusinessRules.ProductNameSholdNotExistWhenCreated(request.Name);
 
+
+                // save image to webserver
+
+
+
+                // create product after uploading images
                 Product product = _mapper.Map<Product>(request);
 
                 await _productRepository.CreateAsync(product);

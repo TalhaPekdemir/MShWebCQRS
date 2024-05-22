@@ -1,5 +1,6 @@
 using MShWeb.Persistence;
 using MShWeb.Application;
+using Microsoft.Extensions.FileProviders;
 
 namespace MShWeb.API
 {
@@ -15,6 +16,8 @@ namespace MShWeb.API
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddHttpContextAccessor();
 
             builder.Services.AddPersistenceServices(builder.Configuration);
             builder.Services.AddApplicationServices();
@@ -33,9 +36,18 @@ namespace MShWeb.API
             app.UseAuthorization();
 
 
+            app.UseStaticFiles(new StaticFileOptions() 
+                {
+                    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", @builder.Configuration?.GetSection("UploadSettings")["Path"]!)),
+                    RequestPath = new PathString($"/{builder.Configuration?.GetSection("UploadSettings")["Path"]}")
+                });;
+            
+
             app.MapControllers();
 
             app.Run();
+
+            
         }
     }
 }

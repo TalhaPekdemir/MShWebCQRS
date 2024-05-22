@@ -8,6 +8,7 @@ namespace MShWeb.Application.Features.Products.Profiles
     {
         public MappingProfiles()
         {
+            // WARN  IFormFile dan string e dönüşürken nasıl map edecek
             CreateMap<CreateProductCommand, Product>().ReverseMap();
             CreateMap<CreatedProductResponse, Product>().ReverseMap();
         }

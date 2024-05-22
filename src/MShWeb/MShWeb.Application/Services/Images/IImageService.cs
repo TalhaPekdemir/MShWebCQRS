@@ -1,15 +1,18 @@
-﻿using MShWeb.Domain.Entities;
+﻿using Microsoft.AspNetCore.Http;
+using MShWeb.Domain.Entities;
 using System.Linq.Expressions;
 
 namespace MShWeb.Application.Services.Images
 {
     public interface IImageService
     {
-        Task<Image> CreateProductAsync(Image product);
+        Task<Image> CreateAsync(IFormFile file);
 
-        Task<Image> UpdateProductAsync(Image product);
+        Task<List<Image>> CreateManyAsync(List<IFormFile> files, Guid productId);
 
-        Task<Image> DeleteProductAsync(Image product, bool isSoft);
+        Task<Image> UpdateAsync(Image image);
+
+        Task<Image> DeleteAsync(Image image, bool isSoft);
 
         Task<Image> GetAsync(Expression<Func<Image, bool>> predicate);
 

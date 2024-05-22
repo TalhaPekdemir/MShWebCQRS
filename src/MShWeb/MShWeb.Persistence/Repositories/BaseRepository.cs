@@ -74,5 +74,18 @@ namespace MShWeb.Persistence.Repositories
             await _context.SaveChangesAsync();
             return entity;
         }
+
+        public async Task<ICollection<TEntity>> CreateManyAsync(ICollection<TEntity> entities)
+        {
+            foreach (var entity in entities)
+            {
+                entity.CreatedDate = DateTime.UtcNow;
+            }
+
+            await _context.AddRangeAsync(entities);
+            await _context.SaveChangesAsync();
+
+            return entities;
+        }
     }
 }
