@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MShWeb.Application.Features.Products.Commands.Create;
+using MShWeb.Application.Features.Products.Queries.GetAll;
 using MShWeb.Domain.Entities;
 
 namespace MShWeb.Application.Features.Products.Profiles
@@ -13,6 +14,7 @@ namespace MShWeb.Application.Features.Products.Profiles
                 p => p.Images, opt => opt.Ignore()
                 ).ReverseMap();
             CreateMap<CreatedProductResponse, Product>().ReverseMap();
+            CreateMap<GetAllProductQueryDto, Product>().ReverseMap();
         }
     }
 }

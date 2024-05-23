@@ -4,7 +4,7 @@
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<Image> Images { get; set; }
+        public virtual ICollection<Image> Images { get; set; }
         
     }
 }

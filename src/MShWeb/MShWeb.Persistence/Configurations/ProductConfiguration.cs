@@ -17,7 +17,7 @@ namespace MShWeb.Persistence.Configurations
             builder.Property(p => p.UpdatedDate).HasColumnName("UpdatedDate");
             builder.Property(p => p.DeletedDate).HasColumnName("DeletedDate");
 
-            builder.HasMany(p => p.Images);
+            builder.HasMany(p => p.Images).WithOne(i => i.Product);
 
             builder.HasQueryFilter(p => !p.DeletedDate.HasValue);
 

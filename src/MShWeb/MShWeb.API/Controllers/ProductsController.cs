@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MShWeb.Application.Features.Products.Commands.Create;
+using MShWeb.Application.Features.Products.Queries.GetAll;
 
 namespace MShWeb.WebAPI.Controllers
 {
@@ -21,6 +22,14 @@ namespace MShWeb.WebAPI.Controllers
             var response = await _mediator.Send(command);
 
             return Created("", response);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllProducts([FromQuery] GetAllProductQuery query)
+        {
+            var response = await _mediator.Send(query);
+
+            return Ok(response);
         }
     }
 }
