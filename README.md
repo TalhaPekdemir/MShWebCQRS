@@ -19,3 +19,10 @@ What will I work on:
 - Capability of communication with designer to place order
 - Register
 - Frontend (thinking about Vue.js + Vite)
+
+Built with:
+- ASP.NET Core Web API
+- .NET 8
+- EntityFramework Core
+- MediatR
+- AutoMapper
