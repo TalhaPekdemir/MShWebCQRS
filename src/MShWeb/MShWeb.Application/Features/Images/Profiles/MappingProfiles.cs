@@ -8,10 +8,10 @@ namespace MShWeb.Application.Features.Images.Profiles
     {
         public MappingProfiles()
         {
+            AddGlobalIgnore("Item");
+
             CreateMap<Image, CreateImageCommand>().ReverseMap();
             CreateMap<Image, CreatedImageResponse>().ReverseMap();
-
-            CreateMap<List<Image>, List<CreatedImageResponse>>().ReverseMap();
         }
     }
 }

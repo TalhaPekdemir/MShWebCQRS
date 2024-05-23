@@ -1,20 +1,21 @@
-﻿using MShWeb.Application.Services.Repositories;
+﻿using MShWeb.Application.Services.Products;
+using MShWeb.Application.Services.Repositories;
 using MShWeb.Domain.Entities;
 
 namespace MShWeb.Application.Features.Products.Rules
 {
     public class ProductBusinessRules
     {
-        private readonly IProductRepository _productRepository;
+        private readonly IProductService _productService;
 
-        public ProductBusinessRules(IProductRepository productRepository)
+        public ProductBusinessRules(IProductService productService)
         {
-            _productRepository = productRepository;
+            _productService = productService;
         }
 
-        public async Task ProductNameSholdNotExistWhenCreated(string name)
+        public async Task ProductNameShouldNotExistWhenCreated(string name)
         {
-            Product? product = await _productRepository.GetAsync(predicate: p =>  p.Name.ToLower() == name.ToLower());
+            Product? product = await _productService.GetAsync(predicate: p => p.Name.ToLower() == name.ToLower());
 
             if(product != null)
             {

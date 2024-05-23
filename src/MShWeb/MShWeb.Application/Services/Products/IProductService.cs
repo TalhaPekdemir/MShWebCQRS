@@ -6,11 +6,11 @@ namespace MShWeb.Application.Services.Products
 {
     public interface IProductService
     {
-        Task<Product> CreateProductAsync(Product product);
+        Task<Product> CreateAsync(Product product);
 
-        Task<Product> UpdateProductAsync(Product product);
+        Task<Product> UpdateAsync(Product product);
             
-        Task<Product> DeleteProductAsync(Product product, bool isSoft);
+        Task<Product> DeleteAsync(Product product, bool isSoft);
     
         Task<Product> GetAsync(Expression<Func<Product, bool>> predicate);
 

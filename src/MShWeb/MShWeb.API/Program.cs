@@ -36,9 +36,17 @@ namespace MShWeb.API
             app.UseAuthorization();
 
 
+
+            // if wwwroot or upload path does not exist will throw error
+            var providerPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", @builder.Configuration?.GetSection("UploadSettings")["Path"]);
+            if (!Directory.Exists(providerPath))
+            {
+                Directory.CreateDirectory(providerPath);
+            }
+
             app.UseStaticFiles(new StaticFileOptions() 
                 {
-                    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", @builder.Configuration?.GetSection("UploadSettings")["Path"]!)),
+                    FileProvider = new PhysicalFileProvider(providerPath),
                     RequestPath = new PathString($"/{builder.Configuration?.GetSection("UploadSettings")["Path"]}")
                 });;
             

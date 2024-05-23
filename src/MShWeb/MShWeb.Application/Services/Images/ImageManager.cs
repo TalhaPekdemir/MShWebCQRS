@@ -3,16 +3,19 @@ using MShWeb.Application.Services.Repositories;
 using MShWeb.Domain.Entities;
 using System.Linq.Expressions;
 using MShWeb.Application.Services.Helpers;
+using MShWeb.Application.Services.Files;
 
 namespace MShWeb.Application.Services.Images
 {
     public class ImageManager : IImageService
     {
         private readonly IImageRepository _imageRepository;
+        private readonly IFileService _fileService;
 
-        public ImageManager(IImageRepository imageRepository)
+        public ImageManager(IImageRepository imageRepository, IFileService fileService)
         {
             _imageRepository = imageRepository;
+            _fileService = fileService;
         }
 
         public Task<Image> CreateAsync(IFormFile file)
@@ -66,13 +69,13 @@ namespace MShWeb.Application.Services.Images
             // file.ContentType maybe???
             // get path somehow better
 
-            string path = HttpContextHelper.Env.WebRootPath + "uploads";
+            string path = Path.Combine(HttpContextHelper.Env.WebRootPath, "uploads");
             string fileName = Guid.NewGuid().ToString();
             string extension = Path.GetExtension(file.FileName);
 
             EnsureDirectoryExists(path);
 
-            string pathToSave = Path.Combine(path, fileName, extension);
+            string pathToSave = Path.Combine(path, fileName + extension);
             using (FileStream stream = File.Create(pathToSave))
             {
                 await file.CopyToAsync(stream);

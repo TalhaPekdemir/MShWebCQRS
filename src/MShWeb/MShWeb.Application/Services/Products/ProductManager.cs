@@ -14,13 +14,13 @@ namespace MShWeb.Application.Services.Products
             _productRepository = productRepository;
         }
 
-        public async Task<Product> CreateProductAsync(Product product)
+        public async Task<Product> CreateAsync(Product product)
         {
             Product createdProduct = await _productRepository.CreateAsync(product);
             return createdProduct;
         }
 
-        public async Task<Product> DeleteProductAsync(Product product, bool isSoft = false)
+        public async Task<Product> DeleteAsync(Product product, bool isSoft = false)
         {
             Product deletedProduct = await _productRepository.DeleteAsync(product, isSoft);
             return deletedProduct;
@@ -39,7 +39,7 @@ namespace MShWeb.Application.Services.Products
             return await _productRepository.GetAsync(predicate);
         }
 
-        public async Task<Product> UpdateProductAsync(Product product)
+        public async Task<Product> UpdateAsync(Product product)
         {
             Product updatedProduct = await _productRepository.UpdateAsync(product);
             return updatedProduct;

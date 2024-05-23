@@ -1,4 +1,5 @@
-﻿using MShWeb.Domain.Entities;
+﻿using MShWeb.Application.Features.Images.Commands.Create;
+using MShWeb.Domain.Entities;
 
 namespace MShWeb.Application.Features.Products.Commands.Create
 {
@@ -6,6 +7,7 @@ namespace MShWeb.Application.Features.Products.Commands.Create
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public List<Image> Images { get; set; }
+        public string Description { get; set; }
+        public List<CreatedImageResponse> Images { get; set; }
     }
 }
