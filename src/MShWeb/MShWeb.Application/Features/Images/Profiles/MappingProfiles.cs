@@ -12,6 +12,11 @@ namespace MShWeb.Application.Features.Images.Profiles
 
             CreateMap<Image, CreateImageCommand>().ReverseMap();
             CreateMap<Image, CreatedImageResponse>().ReverseMap();
+            
+            CreateMap<FileInfo, Image>()
+                .ForMember(d => d.CreatedDate, opt => opt.MapFrom(s => s.CreationTimeUtc))
+                .ForMember(d => d.Source, opt => opt.MapFrom(s => s.Name + s.Extension))
+                .ReverseMap();
         }
     }
 }

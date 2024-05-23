@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using MShWeb.Application.Features.Products.Rules;
+using MShWeb.Application.Services.Files;
 using MShWeb.Application.Services.Images;
 using MShWeb.Application.Services.Products;
 using System.Reflection;
@@ -22,6 +23,7 @@ namespace MShWeb.Application
             // TODO add repository implementation services
             services.AddScoped<IProductService, ProductManager>();
             services.AddScoped<IImageService, ImageManager>();
+            services.AddScoped<IFileService, StaticFileService>();
 
             return services;
         }

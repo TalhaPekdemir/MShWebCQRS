@@ -2,8 +2,10 @@
 using MShWeb.Application.Services.Repositories;
 using MShWeb.Domain.Entities;
 using System.Linq.Expressions;
-using MShWeb.Application.Services.Helpers;
 using MShWeb.Application.Services.Files;
+using Microsoft.Extensions.FileProviders;
+using AutoMapper;
+
 
 namespace MShWeb.Application.Services.Images
 {
@@ -11,11 +13,13 @@ namespace MShWeb.Application.Services.Images
     {
         private readonly IImageRepository _imageRepository;
         private readonly IFileService _fileService;
+        private readonly IMapper _mapper;
 
-        public ImageManager(IImageRepository imageRepository, IFileService fileService)
+        public ImageManager(IImageRepository imageRepository, IFileService fileService, IMapper mapper)
         {
             _imageRepository = imageRepository;
             _fileService = fileService;
+            _mapper = mapper;
         }
 
         public Task<Image> CreateAsync(IFormFile file)
@@ -25,16 +29,22 @@ namespace MShWeb.Application.Services.Images
 
         public async Task<List<Image>> CreateManyAsync(List<IFormFile> files, Guid productId)
         {
-            var createdImages = await SaveFilesAsync(files);
+            // save files first
+            List<FileInfo> fileInfos = (List<FileInfo>)await _fileService.SaveFilesAsync(files);
 
-            foreach (var image in createdImages)
+            // map from fileinfo to image entity 
+            List<Image> images = _mapper.Map<List<Image>>(fileInfos);
+
+            // add same product id for one to many
+            foreach (var image in images)
             {
                 image.ProductId = productId;
             }
 
-            await _imageRepository.CreateManyAsync(createdImages);
+            // save to db
+            await _imageRepository.CreateManyAsync(images);
 
-            return createdImages;
+            return images;
         }
 
         public Task<Image> DeleteAsync(Image image, bool isSoft)
@@ -61,56 +71,56 @@ namespace MShWeb.Application.Services.Images
 
 
 
-        private async Task<Image> SaveFileAsync(IFormFile file)
-        {
-            // requirements: path, filename, extension
-            // don't trust filename genrate guid
-            // dont trust extension, can be different but can't be bothered to check right now
-            // file.ContentType maybe???
-            // get path somehow better
+        //private async Task<Image> SaveFileAsync(IFormFile file)
+        //{
+        //    // requirements: path, filename, extension
+        //    // don't trust filename genrate guid
+        //    // dont trust extension, can be different but can't be bothered to check right now
+        //    // file.ContentType maybe???
+        //    // get path somehow better
 
-            string path = Path.Combine(HttpContextHelper.Env.WebRootPath, "uploads");
-            string fileName = Guid.NewGuid().ToString();
-            string extension = Path.GetExtension(file.FileName);
+        //    string path = Path.Combine(HttpContextHelper.Env.WebRootPath, "uploads");
+        //    string fileName = Guid.NewGuid().ToString();
+        //    string extension = Path.GetExtension(file.FileName);
 
-            EnsureDirectoryExists(path);
+        //    EnsureDirectoryExists(path);
 
-            string pathToSave = Path.Combine(path, fileName + extension);
-            using (FileStream stream = File.Create(pathToSave))
-            {
-                await file.CopyToAsync(stream);
-            }
+        //    string pathToSave = Path.Combine(path, fileName + extension);
+        //    using (FileStream stream = File.Create(pathToSave))
+        //    {
+        //        await file.CopyToAsync(stream);
+        //    }
 
-            return new Image()
-            {
-                CreatedDate = DateTime.UtcNow,
-                Source = fileName + extension,
-            };
-        }
+        //    return new Image()
+        //    {
+        //        CreatedDate = DateTime.UtcNow,
+        //        Source = fileName + extension,
+        //    };
+        //}
 
 
-        private async Task<List<Image>> SaveFilesAsync(List<IFormFile> files)
-        {
-            List<Image> images = new List<Image>();
+        //private async Task<List<Image>> SaveFilesAsync(List<IFormFile> files)
+        //{
+        //    List<Image> images = new List<Image>();
 
-            foreach (var file in files)
-            {
-                if (file.Length > 0)
-                {
-                    Image image = await SaveFileAsync(file);
-                    images.Add(image);
-                }
-            }
+        //    foreach (var file in files)
+        //    {
+        //        if (file.Length > 0)
+        //        {
+        //            Image image = await SaveFileAsync(file);
+        //            images.Add(image);
+        //        }
+        //    }
 
-            return images;
-        }
+        //    return images;
+        //}
 
-        private void EnsureDirectoryExists(string filePath)
-        {
-            if (!Directory.Exists(filePath))
-            {
-                Directory.CreateDirectory(filePath);
-            }
-        }
+        //private void EnsureDirectoryExists(string filePath)
+        //{
+        //    if (!Directory.Exists(filePath))
+        //    {
+        //        Directory.CreateDirectory(filePath);
+        //    }
+        //}
     }
 }
