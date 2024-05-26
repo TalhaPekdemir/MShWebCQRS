@@ -9,10 +9,10 @@ namespace MShWeb.Application.Features.Products.Profiles
     {
         public MappingProfiles()
         {
-            // WARN  IFormFile dan string e dönüşürken nasıl map edecek
             CreateMap<CreateProductCommand, Product>().ForMember(
-                p => p.Images, opt => opt.Ignore()
+                p => p.Images, opt => opt.Ignore() // ignore same named IFormFile -> Image conversion
                 ).ReverseMap();
+
             CreateMap<CreatedProductResponse, Product>().ReverseMap();
             CreateMap<GetAllProductQueryDto, Product>().ReverseMap();
         }
