@@ -5,11 +5,6 @@ namespace MShWeb.Application.Services.Files
 {
     public class StaticFileService : IFileService
     {
-        public Task<FileInfo> SaveFile(IFormFile file)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<FileInfo> SaveFileAsync(IFormFile file)
         {
             // requirements: path, filename, extension
@@ -31,11 +26,6 @@ namespace MShWeb.Application.Services.Files
             }
 
             return new FileInfo(pathToSave);
-        }
-
-        public Task<ICollection<FileInfo>> SaveFiles(ICollection<IFormFile> files)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<ICollection<FileInfo>> SaveFilesAsync(ICollection<IFormFile> files)
