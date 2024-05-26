@@ -12,6 +12,7 @@ namespace MShWeb.Persistence.Configurations
 
             builder.Property(i => i.Id).HasColumnName("Id").IsRequired();
             builder.Property(i => i.Source).HasColumnName("Source");
+            builder.Property(i => i.ProductId).HasColumnName("ProductId");
             builder.Property(i => i.CreatedDate).HasColumnName("CreatedDate").IsRequired();
             builder.Property(i => i.UpdatedDate).HasColumnName("UpdatedDate");
             builder.Property(i => i.DeletedDate).HasColumnName("DeletedDate");

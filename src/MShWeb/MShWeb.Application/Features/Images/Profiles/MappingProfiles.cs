@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MShWeb.Application.Features.Images.Commands.Create;
+using MShWeb.Application.Features.Images.Dtos;
 using MShWeb.Domain.Entities;
 
 namespace MShWeb.Application.Features.Images.Profiles
@@ -17,6 +18,8 @@ namespace MShWeb.Application.Features.Images.Profiles
                 .ForMember(d => d.CreatedDate, opt => opt.MapFrom(s => s.CreationTimeUtc))
                 .ForMember(d => d.Source, opt => opt.MapFrom(s => s.Name + s.Extension))
                 .ReverseMap();
+
+            CreateMap<Image, ImageDto>().ReverseMap();
         }
     }
 }

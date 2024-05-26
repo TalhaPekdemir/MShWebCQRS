@@ -38,7 +38,8 @@ namespace MShWeb.Persistence.Migrations
                         .HasColumnName("DeletedDate");
 
                     b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("ProductId");
 
                     b.Property<string>("Source")
                         .IsRequired()

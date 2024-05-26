@@ -6,7 +6,7 @@ using MShWeb.Domain.Entities;
 
 namespace MShWeb.Application.Features.Products.Queries.GetAll
 {
-    public class GetAllProductQuery:IRequest<List<GetAllProductQueryDto>>
+    public class GetAllProductQuery : IRequest<List<GetAllProductQueryDto>>
     {
         public class GetAllProductQUeryHandler : IRequestHandler<GetAllProductQuery, List<GetAllProductQueryDto>>
         {

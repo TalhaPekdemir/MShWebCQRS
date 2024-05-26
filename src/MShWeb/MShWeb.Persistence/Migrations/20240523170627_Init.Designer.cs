@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MShWeb.Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    [Migration("20240521160804_Initial")]
-    partial class Initial
+    [Migration("20240523170627_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,7 +41,8 @@ namespace MShWeb.Persistence.Migrations
                         .HasColumnName("DeletedDate");
 
                     b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("ProductId");
 
                     b.Property<string>("Source")
                         .IsRequired()

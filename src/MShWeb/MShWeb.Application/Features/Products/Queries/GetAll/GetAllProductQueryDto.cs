@@ -1,4 +1,5 @@
-﻿using MShWeb.Domain.Entities;
+﻿using MShWeb.Application.Features.Images.Dtos;
+using MShWeb.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,6 @@ namespace MShWeb.Application.Features.Products.Queries.GetAll
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<Image> Images { get; set; }
+        public List<ImageDto> Images { get; set; }
     }
 }
