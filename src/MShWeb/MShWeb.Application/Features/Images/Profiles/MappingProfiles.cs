@@ -9,7 +9,7 @@ namespace MShWeb.Application.Features.Images.Profiles
     {
         public MappingProfiles()
         {
-            AddGlobalIgnore("Item");
+            AddGlobalIgnore("Item"); // fix for new AutoMapper IEnumarable indexer mapping issue
 
             CreateMap<Image, CreateImageCommand>().ReverseMap();
             CreateMap<Image, CreatedImageResponse>().ReverseMap();
