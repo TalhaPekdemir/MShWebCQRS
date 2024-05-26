@@ -40,9 +40,21 @@ namespace MShWeb.Persistence.Repositories
             return entity;
         }
 
-        public async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate)
+        public async Task<TEntity?> GetAsync(
+            Expression<Func<TEntity, bool>> predicate,
+            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null)
         {
             IQueryable<TEntity> query = _context.Set<TEntity>();
+            
+            if (include != null)
+            {
+                query = include(query);
+            }
+
+            if (predicate != null)
+            {
+                query = query.Where(predicate);
+            }
 
             return await EntityFrameworkQueryableExtensions.FirstOrDefaultAsync(query, predicate);
         }

@@ -24,10 +24,19 @@ namespace MShWeb.Application.Features.Products.Rules
             }
         }
 
-        //private async Task ProductShouldExistWhenSelected(Product product)
-        //{
-        //    Product? selectedProduct = _productRepository.GetAsync();
-        //}
+        public async Task<Product> ProductShouldExistWhenSelectedById(Guid id)
+        {
+            Product? product = await _productService.GetAsync(predicate: p => p.Id == id);
+
+            if(product == null) 
+            {
+                throw new Exception("Product does not exist!");
+            }
+            else
+            {
+                return product;
+            }
+        }
 
     }
 }

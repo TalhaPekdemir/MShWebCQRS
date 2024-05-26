@@ -34,9 +34,12 @@ namespace MShWeb.Application.Services.Products
             return await _productRepository.GetAllAsync(predicate, include);
         }
 
-        public async Task<Product> GetAsync(Expression<Func<Product, bool>> predicate)
+        public async Task<Product> GetAsync(
+            Expression<Func<Product, bool>> predicate,
+            Func<IQueryable<Product>, IIncludableQueryable<Product, object>>? include = null
+            )
         {
-            return await _productRepository.GetAsync(predicate);
+            return await _productRepository.GetAsync(predicate, include);
         }
 
         public async Task<Product> UpdateAsync(Product product)

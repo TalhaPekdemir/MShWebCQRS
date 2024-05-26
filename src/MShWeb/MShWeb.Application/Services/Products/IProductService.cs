@@ -12,7 +12,7 @@ namespace MShWeb.Application.Services.Products
             
         Task<Product> DeleteAsync(Product product, bool isSoft);
     
-        Task<Product> GetAsync(Expression<Func<Product, bool>> predicate);
+        Task<Product> GetAsync(Expression<Func<Product, bool>> predicate, Func<IQueryable<Product>, IIncludableQueryable<Product, object>>? include = null);
 
         Task<List<Product>> GetAllAsync(Expression<Func<Product, bool>>? predicate = null, Func<IQueryable<Product>, IIncludableQueryable<Product, object>>? include = null);
     }

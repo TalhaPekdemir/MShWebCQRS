@@ -6,7 +6,7 @@ namespace MShWeb.Application.Services.Repositories
 {
     public interface IAsyncRepository<TEntity, TEntityId> where TEntity : Entity<TEntityId>
     {
-        Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate);
+        Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null);
 
         // TODO add pagination
         Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? predicate = null, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null);
