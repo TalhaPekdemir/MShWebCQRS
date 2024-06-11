@@ -19,11 +19,10 @@ namespace MShWeb.Persistence.Repositories
         {
             entity.CreatedDate = DateTime.UtcNow;
             await _context.AddAsync(entity);
-            await _context.SaveChangesAsync();
             return entity;
         }
 
-        public async Task<TEntity> DeleteAsync(TEntity entity, bool isSoft)
+        public Task<TEntity> DeleteAsync(TEntity entity, bool isSoft)
         {
             // ignoring the fact that entities has relationships
             if (isSoft)
@@ -36,8 +35,7 @@ namespace MShWeb.Persistence.Repositories
                 _context.Remove(entity);
             }
 
-            await _context.SaveChangesAsync();
-            return entity;
+            return Task.FromResult(entity);
         }
 
         public async Task<TEntity?> GetAsync(
@@ -79,12 +77,12 @@ namespace MShWeb.Persistence.Repositories
             return await query.ToListAsync();
         }
 
-        public async Task<TEntity> UpdateAsync(TEntity entity)
+        public Task<TEntity> UpdateAsync(TEntity entity)
         {
             entity.UpdatedDate = DateTime.UtcNow;
             _context.Update(entity);
-            await _context.SaveChangesAsync();
-            return entity;
+
+            return Task.FromResult(entity);
         }
 
         public async Task<ICollection<TEntity>> CreateManyAsync(ICollection<TEntity> entities)
@@ -95,9 +93,13 @@ namespace MShWeb.Persistence.Repositories
             }
 
             await _context.AddRangeAsync(entities);
-            await _context.SaveChangesAsync();
 
             return entities;
+        }
+
+        public async Task<int> SaveChangesAsync()
+        {
+            return await _context.SaveChangesAsync();
         }
     }
 }

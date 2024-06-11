@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace MShWeb.Application.Services.Repositories
 {
-    public interface IAsyncRepository<TEntity, TEntityId> where TEntity : Entity<TEntityId>
+    public interface IAsyncRepository<TEntity, TEntityId> : IUnitOfWork where TEntity : Entity<TEntityId>
     {
         Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null);
 
