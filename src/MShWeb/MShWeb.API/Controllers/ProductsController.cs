@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using MShWeb.Application.Features.Products.Commands.Create;
 using MShWeb.Application.Features.Products.Queries.GetAll;
 using MShWeb.Application.Features.Products.Queries.GetById;
-using System.Reflection.Metadata.Ecma335;
 
 namespace MShWeb.WebAPI.Controllers
 {
@@ -27,9 +26,9 @@ namespace MShWeb.WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllProducts([FromQuery] GetAllProductQuery query)
+        public async Task<IActionResult> GetAllProducts()
         {
-            var response = await _mediator.Send(query);
+            var response = await _mediator.Send(new GetAllProductQuery());
 
             return Ok(response);
         }

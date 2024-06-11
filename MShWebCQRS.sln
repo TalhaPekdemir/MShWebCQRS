@@ -7,16 +7,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{41C8E377-137
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MShWeb", "MShWeb", "{DB3E4701-C52A-4D7A-B8A1-3105636B965F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MShWeb.Application", "src\MShWeb\MShWeb.Application\MShWeb.Application.csproj", "{2E63D20C-E5AC-4B45-BFD5-9A56168F588B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MShWeb.Application", "src\MShWeb\MShWeb.Application\MShWeb.Application.csproj", "{2E63D20C-E5AC-4B45-BFD5-9A56168F588B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MShWeb.Domain", "src\MShWeb\MShWeb.Domain\MShWeb.Domain.csproj", "{1AC000AD-A973-4965-984E-11564F85AE6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MShWeb.Domain", "src\MShWeb\MShWeb.Domain\MShWeb.Domain.csproj", "{1AC000AD-A973-4965-984E-11564F85AE6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MShWeb.Infrastructure", "src\MShWeb\MShWeb.Infrastructure\MShWeb.Infrastructure.csproj", "{D14313CB-4DDD-4FBB-948A-EC471AC5EC70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MShWeb.Infrastructure", "src\MShWeb\MShWeb.Infrastructure\MShWeb.Infrastructure.csproj", "{D14313CB-4DDD-4FBB-948A-EC471AC5EC70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MShWeb.Persistence", "src\MShWeb\MShWeb.Persistence\MShWeb.Persistence.csproj", "{41BEB6AC-92F6-4B23-B9EC-A93BFDC29FC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MShWeb.Persistence", "src\MShWeb\MShWeb.Persistence\MShWeb.Persistence.csproj", "{41BEB6AC-92F6-4B23-B9EC-A93BFDC29FC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MShWeb.WebAPI", "src\MShWeb\MShWeb.API\MShWeb.WebAPI.csproj", "{FB9B02E7-7A37-4F90-A95A-ED2D2C89BFA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MShWeb.WebAPI", "src\MShWeb\MShWeb.API\MShWeb.WebAPI.csproj", "{FB9B02E7-7A37-4F90-A95A-ED2D2C89BFA5}"
 	ProjectSection(ProjectDependencies) = postProject
+		{2E63D20C-E5AC-4B45-BFD5-9A56168F588B} = {2E63D20C-E5AC-4B45-BFD5-9A56168F588B}
 		{41BEB6AC-92F6-4B23-B9EC-A93BFDC29FC5} = {41BEB6AC-92F6-4B23-B9EC-A93BFDC29FC5}
 	EndProjectSection
 EndProject
