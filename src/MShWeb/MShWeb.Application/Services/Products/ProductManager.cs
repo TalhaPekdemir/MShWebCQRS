@@ -16,7 +16,7 @@ namespace MShWeb.Application.Services.Products
 
         public async Task<Product> CreateAsync(Product product)
         {
-            Product createdProduct = await _productRepository.CreateAsync(product);
+            Product createdProduct = await _productRepository.AddAsync(product);
             return createdProduct;
         }
 

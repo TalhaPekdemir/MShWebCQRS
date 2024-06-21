@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MShWeb.Application.Services.Repositories;
+using MShWeb.Application.Services.UnitOfWork;
 using MShWeb.Persistence.Contexts;
 using MShWeb.Persistence.Repositories;
 
@@ -16,6 +17,7 @@ namespace MShWeb.Persistence
 
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IImageRepository, ImageRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;
         }

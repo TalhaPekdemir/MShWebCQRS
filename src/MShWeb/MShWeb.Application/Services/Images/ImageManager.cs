@@ -35,13 +35,13 @@ namespace MShWeb.Application.Services.Images
             List<Image> images = _mapper.Map<List<Image>>(fileInfos);
 
             // add same product id for one to many
-            foreach (var image in images)
-            {
-                image.ProductId = productId;
-            }
+            //foreach (var image in images)
+            //{
+            //    image.ProductId = productId;
+            //}
 
             // save to db
-            await _imageRepository.CreateManyAsync(images);
+            //await _imageRepository.CreateManyAsync(images);
 
             return images;
         }

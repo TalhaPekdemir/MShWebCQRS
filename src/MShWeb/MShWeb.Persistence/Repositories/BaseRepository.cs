@@ -15,14 +15,26 @@ namespace MShWeb.Persistence.Repositories
             _context = context;
         }
 
-        public async Task<TEntity> CreateAsync(TEntity entity)
+        public virtual async Task<TEntity> AddAsync(TEntity entity)
         {
             entity.CreatedDate = DateTime.UtcNow;
             await _context.AddAsync(entity);
             return entity;
         }
 
-        public Task<TEntity> DeleteAsync(TEntity entity, bool isSoft)
+        public virtual async Task<ICollection<TEntity>> AddRangeAsync(ICollection<TEntity> entities)
+        {
+            foreach (var entity in entities)
+            {
+                entity.CreatedDate = DateTime.UtcNow;
+            }
+
+            await _context.AddRangeAsync(entities);
+
+            return entities;
+        }
+
+        public virtual Task<TEntity> DeleteAsync(TEntity entity, bool isSoft)
         {
             // ignoring the fact that entities has relationships
             if (isSoft)
@@ -38,7 +50,27 @@ namespace MShWeb.Persistence.Repositories
             return Task.FromResult(entity);
         }
 
-        public async Task<TEntity?> GetAsync(
+        public virtual Task<ICollection<TEntity>> DeleteRangeAsync(ICollection<TEntity> entities, bool isSoft)
+        {
+            // ignoring the fact that entities has relationships
+            if (isSoft)
+            {
+                foreach(TEntity entity in entities)
+                {
+                    entity.DeletedDate = DateTime.UtcNow;
+                }
+                
+                _context.UpdateRange(entities);
+            }
+            else
+            {
+                _context.RemoveRange(entities);
+            }
+
+            return Task.FromResult(entities);
+        }
+
+        public virtual async Task<TEntity?> GetAsync(
             Expression<Func<TEntity, bool>> predicate,
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null)
         {
@@ -57,7 +89,7 @@ namespace MShWeb.Persistence.Repositories
             return await EntityFrameworkQueryableExtensions.FirstOrDefaultAsync(query, predicate);
         }
 
-        public async Task<List<TEntity>> GetAllAsync(
+        public virtual async Task<List<TEntity>> GetAllAsync(
             Expression<Func<TEntity, bool>>? predicate = null, 
             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null)
         {
@@ -77,7 +109,7 @@ namespace MShWeb.Persistence.Repositories
             return await query.ToListAsync();
         }
 
-        public Task<TEntity> UpdateAsync(TEntity entity)
+        public virtual Task<TEntity> UpdateAsync(TEntity entity)
         {
             entity.UpdatedDate = DateTime.UtcNow;
             _context.Update(entity);
@@ -85,16 +117,16 @@ namespace MShWeb.Persistence.Repositories
             return Task.FromResult(entity);
         }
 
-        public async Task<ICollection<TEntity>> CreateManyAsync(ICollection<TEntity> entities)
+        public virtual Task<ICollection<TEntity>> UpdateRangeAsync(ICollection<TEntity> entities)
         {
-            foreach (var entity in entities)
+            foreach (TEntity entity in entities)
             {
-                entity.CreatedDate = DateTime.UtcNow;
+                entity.UpdatedDate = DateTime.Now;
             }
 
-            await _context.AddRangeAsync(entities);
+            _context.UpdateRange(entities);
 
-            return entities;
+            return Task.FromResult(entities);
         }
 
         public async Task<int> SaveChangesAsync()
