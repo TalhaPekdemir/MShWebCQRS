@@ -25,8 +25,8 @@ namespace MShWeb.Application.Features.Products.Queries.GetAll
             public async Task<List<GetAllProductQueryDto>> Handle(GetAllProductQuery request, CancellationToken cancellationToken)
             {
                 //List<Product> products = await _productService.GetAllAsync(include: p => p.Include(p => p.Images));
-                List<Product> products = await _unitOfWork.GetRepository<Product>().GetAllAsync(include: p => p.Include(p => p.Images));
-
+                List<Product> products = await _unitOfWork.ProductRepository.GetAllAsync(include: p => p.Include(p => p.Images));
+                
                 var response = _mapper.Map<List<GetAllProductQueryDto>>(products);
 
                 return response;

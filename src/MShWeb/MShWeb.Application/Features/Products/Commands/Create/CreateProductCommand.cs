@@ -41,12 +41,8 @@ namespace MShWeb.Application.Features.Products.Commands.Create
                 // create product first to upload images (we need product id)
                 Product product = _mapper.Map<Product>(request);
 
-                // save image to webserver
-                product.Images = await _imageService.CreateManyAsync(request.Images, product.Id);
-
-                //await _productService.CreateAsync(product);
-                await _unitOfWork.GetRepository<Product>().AddAsync(product);
-                await _unitOfWork.SaveChangesAsync();
+                // call service to handle product saving logic
+                await _productService.AddAsync(product, request.Images);
 
                 // map both product and image entities (being used as DTOs and eliminates circular reference 
                 CreatedProductResponse response = _mapper.Map<CreatedProductResponse>(product);

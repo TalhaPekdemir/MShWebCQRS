@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Query;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore.Query;
 using MShWeb.Domain.Entities;
 using System.Linq.Expressions;
 
@@ -6,7 +7,7 @@ namespace MShWeb.Application.Services.Products
 {
     public interface IProductService
     {
-        Task<Product> CreateAsync(Product product);
+        Task<Product> AddAsync(Product product, List<IFormFile> images);
 
         Task<Product> UpdateAsync(Product product);
             
